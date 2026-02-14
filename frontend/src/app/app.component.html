@@ -1,0 +1,119 @@
+<div class="container">
+  <h1>🍔 Lunch Picker</h1>
+
+  <!-- Error and Success Messages -->
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="success" class="success">{{ success }}</div>
+
+  <!-- No Session: Create or Join -->
+  <div *ngIf="!currentSession">
+    <div class="section">
+      <h2>Create New Session</h2>
+      <label>Select User (only pre-defined users can create sessions):</label>
+      <select [(ngModel)]="selectedUser">
+        <option *ngFor="let user of users" [value]="user.username">
+          {{ user.username }}
+        </option>
+      </select>
+      <button (click)="createSession()" [disabled]="loading">
+        {{ loading ? 'Creating...' : 'Create Session' }}
+      </button>
+    </div>
+
+    <div class="section">
+      <h2>Or Join Existing Session</h2>
+      <label>Enter Session ID:</label>
+      <input 
+        type="text" 
+        [(ngModel)]="sessionIdInput" 
+        placeholder="e.g., a1b2c3d4-..."
+      />
+      <button 
+        class="secondary" 
+        (click)="joinSession()" 
+        [disabled]="loading"
+      >
+        {{ loading ? 'Joining...' : 'Join Session' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Active Session -->
+  <div *ngIf="currentSession">
+    <!-- Session Info -->
+    <div class="session-info">
+      <p><strong>Session ID:</strong> {{ currentSession.id }}</p>
+      <p><strong>Created By:</strong> {{ currentSession.createdBy }}</p>
+      <p><strong>Status:</strong> {{ currentSession.status }}</p>
+      <p *ngIf="currentSession.createdAt">
+        <strong>Created:</strong> {{ currentSession.createdAt | date:'short' }}
+      </p>
+    </div>
+
+    <!-- Winner Display (if session closed) -->
+    <div *ngIf="isSessionClosed && currentSession.chosenRestaurant" class="winner">
+      🎉 Winner: {{ currentSession.chosenRestaurant }} 🎉
+    </div>
+
+    <!-- Submit Restaurant (only if session is open) -->
+    <div *ngIf="canSubmit" class="section">
+      <h2>Submit a Restaurant</h2>
+      <label>Your Name:</label>
+      <input 
+        type="text" 
+        [(ngModel)]="submitterName" 
+        placeholder="Enter your name"
+      />
+      <label>Restaurant Name:</label>
+      <input 
+        type="text" 
+        [(ngModel)]="restaurantName" 
+        placeholder="e.g., McDonald's"
+      />
+      <button (click)="submitRestaurant()" [disabled]="loading">
+        {{ loading ? 'Submitting...' : 'Submit Restaurant' }}
+      </button>
+    </div>
+
+    <!-- Submitted Restaurants -->
+    <div class="section">
+      <h2>Submitted Restaurants ({{ currentSession.restaurants.length }})</h2>
+      <ul *ngIf="currentSession.restaurants.length > 0">
+        <li *ngFor="let choice of currentSession.restaurants" class="restaurant-item">
+          <span>{{ choice.restaurant }}</span>
+          <small>by {{ choice.submittedBy }}</small>
+        </li>
+      </ul>
+      <p *ngIf="currentSession.restaurants.length === 0" class="info">
+        No restaurants submitted yet. Be the first!
+      </p>
+    </div>
+
+    <!-- Pick Random (only if session is open and has restaurants) -->
+    <div *ngIf="canSubmit && currentSession.restaurants.length > 0" class="section">
+      <h2>Pick Winner</h2>
+      <p class="info">
+        Note: Only the person who submitted the first restaurant can pick the winner.
+      </p>
+      <label>Your Name:</label>
+      <input 
+        type="text" 
+        [(ngModel)]="submitterName" 
+        placeholder="Enter your name"
+      />
+      <button (click)="pickRandom()" [disabled]="loading">
+        {{ loading ? 'Picking...' : '🎲 Pick Random Restaurant' }}
+      </button>
+    </div>
+
+    <!-- Actions -->
+    <div class="section">
+      <button class="secondary" (click)="refreshSession()" [disabled]="loading">
+        🔄 Refresh
+      </button>
+      <button class="danger" (click)="leaveSession()">
+        ← Leave Session
+      </button>
+    </div>
+  </div>
+</div>

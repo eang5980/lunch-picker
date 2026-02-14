@@ -1,0 +1,160 @@
+/* Basic reset and simple styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  color: #555;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background-color: #2196F3;
+}
+
+button.secondary:hover {
+  background-color: #0b7dda;
+}
+
+button.danger {
+  background-color: #f44336;
+}
+
+button.danger:hover {
+  background-color: #da190b;
+}
+
+.error {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.info {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background-color: #f9f9f9;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  border-left: 3px solid #4CAF50;
+}
+
+.restaurant-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.winner {
+  background-color: #fff9c4;
+  border-left-color: #fbc02d;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 20px;
+  text-align: center;
+}
+
+.session-info {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.session-info p {
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.session-info strong {
+  color: #333;
+}
